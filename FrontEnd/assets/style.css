@@ -125,6 +125,35 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+.filterbuttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+    gap: 5px;
+}
+
+.filterbuttons button {
+	margin: 2px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #f2f2f2;
+    background-color: white;
+    gap: 5px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    min-width: 165px;
+}
+
+.filterbuttons button:hover {
+	background-color: #DEEBFF;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
