@@ -49,9 +49,14 @@ table {
 /** end reset css**/
 body {
 	max-width: 1140px;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
+	;
 }
 header {
 	display: flex;
@@ -98,6 +103,12 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -123,8 +134,17 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
+
+#titleGroup {
+	margin-bottom: 2em; 
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	align-items: center;
+}
+
+
 
 .filterbuttons {
 	display: flex;
@@ -137,18 +157,22 @@ li:hover {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 1em;
-	color: white;
-	background-color: #1D6154;
+	color: #1D6154;
+	background-color: transparent;
 	margin : 2em auto ;
 	width: 180px;
 	height: 50px;
 	text-align: center;
 	border-radius: 60px ;
+	border: 1px solid #1D6154;
 }
 
-.filterbuttons button:hover {
-	background-color: #DEEBFF;
+.filterbuttons button.active {
+	color: white;
+	background-color: #1D6154;
+
 }
+
 
 .gallery {
 	width: 100%;
@@ -194,15 +218,40 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+#contact a{
+	margin: 1em auto;
+}
+
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
+	
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 1em;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	height: 50px;
+	text-align: center;
+	border-radius: 60px ;
+	border: 0;
+	
+}
+
+footer {
+	background-color: white;
+	height: 60px;
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	margin-top: auto;
 }
 
 footer nav ul {
@@ -211,3 +260,174 @@ footer nav ul {
 	margin: 2em
 }
 
+
+dialog {
+	padding: 0;
+	width: 630px;
+	height: 688px;
+	border-radius: 10px;
+	border: 1px solid lightgray;
+}
+
+dialog form {
+	padding: 1rem;
+}
+
+dialog::backdrop {
+	background-color: #0000004D;
+	;
+  }
+
+
+.modalContent {
+	width: 100%; 
+	background-color: #FFFEF8;
+	border-radius: 10px;
+	flex-direction: column;
+}
+
+
+#removePanel, #addPanel {
+	border-radius: 10px;
+	background-color: #FFFEF8;
+	margin: auto;
+	padding: 20px;
+	border: 0;
+	width: 70%;
+	height: auto;
+	flex-direction: column;
+}
+
+#editModal h2 {
+	font-size: 26px;
+	font-family: 'Work Sans';
+	color: black;
+	font-weight: 400;
+	text-align: center;
+}
+
+#addButton, #validateAdd {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Work Sans';
+}
+
+input[type="submit"]:disabled {
+	background-color: #A7A7A7;
+	color: white;
+}
+
+hr {
+	background-color: #B3B3B3;
+	height: 1px;
+	margin-top: 45px;
+	width: 100%;
+	border: 0;
+}
+
+.galleryModal {
+	padding: 2rem 0;
+	align-self: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 8px;
+	grid-row-gap: 8px;
+}
+
+.galleryModal img {
+	width: 100%;
+}
+
+.galleryModal .thumbnail {
+	position: relative;
+}
+
+.galleryModal .trashcan {
+	width: 17px; 
+	height: 17px; 
+	position: absolute; 
+	top: 5px;
+	right: 5px;
+}
+
+#gallery_edit_img {
+	position: relative;
+	display: inline-block;
+}
+  
+.inputImage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #E8F1F6;
+	width: 100%;
+}
+
+.preview {
+	width: 13rem;
+	padding-bottom: 18px;
+}
+
+.preview img {
+	max-width: 81px;
+}
+
+#previewdetails {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#previewdetails i {
+	font-size: 90px;
+	padding: 1.5rem 0;
+	color: #B9C5CC;
+}
+
+#previewdetails span {
+	font-size: 10px;
+	padding-bottom: 2rem;
+}
+
+#imageUpload {
+	opacity: 0;
+}
+
+#btnImage {
+	font-family: 'Syne';
+	font-weight: 700;
+	background-color: rgba(0, 0, 0, 0.2);
+	text-align: center;
+	border-radius: 60px ;
+	padding: 1rem 2rem;
+	color: #306685;
+	margin: 0.5rem 0;
+}
+
+.inputGroup {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.inputGroup label {
+	margin: 2em 0 1em 0;
+}
+
+.inputGroup input, .inputGroup select {
+	width: 100%;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	background-color: white;
+}
+
+#addForm {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
