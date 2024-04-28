@@ -1,10 +1,5 @@
 window.addEventListener("load", function () {
 
-    var works = this.document.getElementsByTagName('figure');
-    [...works].map((e) => e.remove());
-
-
-
     fetch("http://localhost:5678/api/works", {
         method: "GET",
         headers: {
@@ -25,6 +20,7 @@ window.addEventListener("load", function () {
                 var categories = new Map();
                 let gallery = this.document.getElementsByClassName("gallery")[0];
                 let galleryModal = document.getElementById('galleryModal');
+
                 for (const doc of jsonArray) {
                     categories.set(doc['category']['id'], doc['category']['name']);
                     let figure = this.document.createElement("figure");
@@ -52,6 +48,17 @@ window.addEventListener("load", function () {
                     galleryModal.append(thumbnail);
 
                 }
+
+                var select = document.getElementById('newCategory');
+
+                categories.forEach((value, key) => {
+                    let option = document.createElement('option');
+                    option.setAttribute('value', key);
+                    option.innerHTML = value;
+                    select.append(option);
+                });
+
+
             }
         })
         .then(() => {
@@ -66,7 +73,6 @@ window.addEventListener("load", function () {
             this.alert(error);
         });
 
-
     const editView = () => {
         let dialog = this.document.getElementById('editModal');
         dialog.addEventListener("click", (e) => {
@@ -74,8 +80,6 @@ window.addEventListener("load", function () {
                 dialog.close();
             }
         });
-        this.document.getElementById('editButton').style.display = 'none';
-        this.document.getElementById('logoutButton').style.display = 'none';
 
         const input = document.querySelector("#imageUpload");
         const preview = document.querySelector(".preview");
@@ -96,7 +100,6 @@ window.addEventListener("load", function () {
             inputs[i].addEventListener('input', () => {
                 let values = []
                 inputs.forEach(v => values.push(v.value))
-
                 button.disabled = values.includes('')
             })
         }
@@ -113,30 +116,33 @@ window.addEventListener("load", function () {
             back.style.visibility = 'visible';
             addPanel.style.display = 'block';
             removePanel.style.display = 'none';
-            var url = location.href;              
-            location.href = "#modalContent";                
+            var url = location.href;
+            location.href = "#modalContent";
             history.replaceState(null, null, url);
         });
-        let close = this.document.getElementById('close');
 
         back.addEventListener('click', () => {
             addPanel.style.display = 'none';
             removePanel.style.display = 'block';
             back.style.visibility = 'hidden';
-            var url = location.href;               
-            location.href = "#modalContent";                
+            var url = location.href;
+            location.href = "#modalContent";
             history.replaceState(null, null, url);
         });
+
+        let close = this.document.getElementById('close');
 
         close.addEventListener('click', () => {
             dialog.close();
         });
+
         this.document.getElementById('editButton').style.display = 'inline';
 
         this.document.getElementById('editButton').addEventListener('click', () => {
             let dialog = window.document.getElementById('editModal');
             dialog.showModal();
         });
+
         let logout = this.document.getElementById('logoutButton');
         logout.style.display = 'block';
         logout.addEventListener("click", e => {
@@ -146,7 +152,6 @@ window.addEventListener("load", function () {
         });
         this.document.getElementById('loginButton').style.display = 'none';
     };
-
 
     const filterButtons = () => fetch("http://localhost:5678/api/categories", {
         method: "GET",
@@ -176,7 +181,7 @@ window.addEventListener("load", function () {
                 button.classList.add("btn");
                 portfolio.insertBefore(filterbuttons, gallery);
                 filterbuttons.append(button);
-                button.addEventListener('click', () => setVisibility(button, 0));
+                button.addEventListener('click', () => setVisibility(button));
                 for (const category of jsonArray) {
                     let button = this.document.createElement("button");
                     button.classList.add("btn");
@@ -184,7 +189,6 @@ window.addEventListener("load", function () {
                     button.innerHTML = category['name'];
                     filterbuttons.append(button);
                 }
-
 
             }
             this.document.getElementById('editButton').style.display = 'none';
@@ -207,7 +211,6 @@ window.addEventListener("load", function () {
         if (localStorage.token) {
             headers['Authorization'] = 'Bearer ' + localStorage.token;
         }
-
 
         fetch("http://localhost:5678/api/works/" + id, {
             method: "DELETE",
@@ -237,7 +240,6 @@ window.addEventListener("load", function () {
             });
 
     }
-
 
     function addWork(event) {
 
@@ -307,9 +309,8 @@ window.addEventListener("load", function () {
 
     }
 
-
-    function setVisibility(button, id) {
-        var works = this.document.getElementsByTagName('figure');
+    function setVisibility(button, id = 0) {
+        var works = this.document.getElementById('portfolio').getElementsByTagName('figure');
 
         var buttons = this.document.getElementById('filter').children;
         for (let i = 0; i < buttons.length; i++) {
@@ -317,8 +318,6 @@ window.addEventListener("load", function () {
 
         }
         button.classList.add('active');
-
-
 
         for (var figure of works) {
             if (id == 0 || figure.getAttribute('categoryid') == id) {
@@ -370,15 +369,9 @@ window.addEventListener("load", function () {
 
     const fileTypes = [
         "image/apng",
-        "image/bmp",
-        "image/gif",
         "image/jpeg",
         "image/pjpeg",
-        "image/png",
-        "image/svg+xml",
-        "image/tiff",
-        "image/webp",
-        "image/x-icon",
+        "image/png"
     ];
 
     function validFileType(file) {
@@ -394,8 +387,5 @@ window.addEventListener("load", function () {
             return `${(number / 1048576).toFixed(1)} MB`;
         }
     }
-
-
-
 
 });
